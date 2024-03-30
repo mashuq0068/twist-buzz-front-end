@@ -1,6 +1,7 @@
 "use client"
 import CreateNews from '@/components/CreateNews/CreateNews';
-import Editor from '@/components/Editor/Editor';
+import NewsEditor from '@/components/NewsEditor/NewsEditor';
+
 import React, { useState } from 'react';
 
 const Create = () => {
@@ -11,10 +12,11 @@ const Create = () => {
     
 
     return (
-        <div>
+        <div className='blog-container'>
             {
                 isEditor ?
-                    <Editor title={title} description={description} />
+                <NewsEditor title={title} description={description}/>
+                    
                     :
                     <CreateNews setTitle={setTitle} setDescription={setDescription} setIsEditor={setIsEditor} />
             }
