@@ -10,12 +10,23 @@
 
 
 }
+.nav-container {
+  max-width: 1440px;
+  margin: auto;
+  padding: 24px;
+  
+
+
+}
 .blog-container {
-  max-width: 940px;
+  max-width: 1140px;
   margin: auto;
   padding: 24px;
 
 
+}
+.search-bar {
+  background: url("../../public/images/search-bg.jpg");
 }
 
 
@@ -41,10 +52,16 @@
   .input-form{
     width: 70vw;
   }
+  .nav-container{
+    padding: 0px 24px;
+  }
 }
 @media (max-width: 600px) {
   .container {
     padding: 16px;
+  }
+  .nav-container{
+    padding: 0px 16px;
   }
   .input-form{
     width: 90vw;

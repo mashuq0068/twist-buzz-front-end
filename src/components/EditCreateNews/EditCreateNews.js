@@ -1,8 +1,24 @@
 "use client"
-import React, { useRef } from 'react';
+import { axiosPublic } from '@/axios/api';
+import { useEffect, useState } from 'react';
 
 
-const CreateNews = ({ setTitle, setDescription, setIsEditor , setCategory , setImage }) => {
+const EditCreateNews = ({ setTitle, setDescription, setIsEditor, setCategory, setImage, id }) => {
+    const [news, setNews] = useState("")
+    useEffect(() => {
+
+        axiosPublic.get(`/news/${id}`)
+            .then(response => {
+                setNews(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching news:', error);
+
+            });
+
+
+    }, [id]);
+
     const handleSubmit = (e) => {
         e.preventDefault()
         setTitle(e.target.title.value)
@@ -10,7 +26,7 @@ const CreateNews = ({ setTitle, setDescription, setIsEditor , setCategory , setI
         setImage(e.target.image.value)
         setCategory(e.target.category.value)
         setIsEditor(true)
-        
+
 
     }
 
@@ -28,7 +44,7 @@ const CreateNews = ({ setTitle, setDescription, setIsEditor , setCategory , setI
                     <label>
                         Title
                     </label>
-                    <input type='text' required={true} name='title' className='input-form' placeholder='Enter name' />
+                    <input defaultValue={news?.title} type='text' required={true} name='title' className='input-form' placeholder='Enter name' />
                 </div>
                 <div className='form-control'>
                     <label>
@@ -45,15 +61,15 @@ const CreateNews = ({ setTitle, setDescription, setIsEditor , setCategory , setI
                 </div>
                 <div className='form-control'>
                     <label>
-                       Image
+                        Image
                     </label>
-                    <input type='text' required={true} name='image' className='input-form' placeholder='Enter Image-url' />
+                    <input defaultValue={news?.image} type='text' required={true} name='image' className='input-form' placeholder='Enter Image-url' />
                 </div>
                 <div className='form-control'>
                     <label>
                         Description
                     </label>
-                    <textarea rows={5} required={true} name='description' className='input-form' placeholder='Enter description'>
+                    <textarea defaultValue={news?.description} rows={5} required={true} name='description' className='input-form' placeholder='Enter description'>
 
                     </textarea>
                 </div>
@@ -68,4 +84,4 @@ const CreateNews = ({ setTitle, setDescription, setIsEditor , setCategory , setI
     );
 };
 
-export default CreateNews;
+export default EditCreateNews;

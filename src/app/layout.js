@@ -1,5 +1,7 @@
-import {  Work_Sans } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navabar/Navbar";
+import Searchbar from "@/components/Searchbar/Searchbar";
 
 const work_sans = Work_Sans({ subsets: ["latin"] });
 
@@ -11,7 +13,21 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={work_sans.className}>{children}</body>
+
+      <body className={work_sans.className}>
+        <header>
+          <nav className="shadow-lg">
+            <Navbar />
+          </nav>
+        </header>
+
+        <main>
+          {children}
+        </main>
+        <footer>
+        </footer>
+
+      </body>
     </html>
   );
 }

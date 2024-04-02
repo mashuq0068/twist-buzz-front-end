@@ -1,17 +1,33 @@
-import useAxiosPublic from '@/hooks/useAxiosPublic';
-import React from 'react';
+import { axiosPublic } from "@/axios/api";
 
-const SingleNews = async({params}) => {
-    const axios = useAxiosPublic()
-    const response = await axios.get(`/news/${params?.id}`)
+export const generateMetadata = async ({ params }) => {
+    const response = await axiosPublic.get(`/news/${params?.id}`);
+    const news = await response.data;
+
+    return {
+        title: news.title,
+        description: news.description // Generate dynamic description here
+    };
+};
+
+
+const SingleNews = async ({ params }) => {
+    const response = await axiosPublic.get(`/news/${params?.id}`)
     const news = await response.data
-   
-    
-    
+
+
+
+
+
     return (
-        <div className='blog-container' id='news-content' dangerouslySetInnerHTML={{ __html: news?.news }}>
-            
-        </div>
+        <article className='blog-container'>
+            <section>
+                <h1 className="text-3xl font-semibold">{news?.title}</h1>
+            </section>
+            <section id='news-content' dangerouslySetInnerHTML={{ __html: news?.news }}>
+
+            </section>
+        </article>
     );
 };
 
