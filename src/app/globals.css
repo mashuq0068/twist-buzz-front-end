@@ -25,6 +25,9 @@
 
 
 }
+.blog-content > p {
+  line-height: 1.5rem;
+}
 .search-bar {
   background: url("../../public/images/search-bg.jpg");
 }
