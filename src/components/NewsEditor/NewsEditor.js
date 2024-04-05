@@ -3,6 +3,7 @@ import { axiosPublic } from '@/axios/api';
 import { Editor } from '@tinymce/tinymce-react';
 import moment from 'moment';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const NewsEditor = ({ title, description, image, category }) => {
   const [editorContent, setEditorContent] = useState('');
@@ -24,7 +25,14 @@ const NewsEditor = ({ title, description, image, category }) => {
     axiosPublic.post("/news", data)
       .then(
         res => {
-          console.log(res.data)
+         if(res.data.insertedId){
+          Swal.fire({
+            title: "Published!",
+            text: "news published successfully",
+            icon: "success"
+          });
+
+         }
         }
       )
       .catch(error => {

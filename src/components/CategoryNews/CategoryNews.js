@@ -7,19 +7,18 @@ import { axiosPublic } from '@/axios/api';
 import Link from 'next/link';
 import Footer from '../Footer/Footer';
 
-const News = () => {
-    const [hoveredItems, setHoveredItems] = useState({});
+const CategoryNews = ({ category }) => {
     const [hoveredId, setHoveredId] = useState(null);
-    const [skipPages, setSkipPages] = useState(0)
-    const [allNews, setAllNews] = useState([])
+    const [skipPages, setSkipPages] = useState(0);
+    const [allNews, setAllNews] = useState([]);
     const [isLoading , setIsLoading] = useState(true)
 
     useEffect(() => {
-        axiosPublic.get(`/allNews?skipPages=${skipPages}&perPageData=${16}`)
+        axiosPublic.get(`/categoryNews?skipPages=${skipPages}&perPageData=${16}&category=${category}`)
             .then(res => {
                 setAllNews(res.data)
+                console.log(res.data)
                 setIsLoading(false)
-
             })
             .catch(error => {
                 console.error(error.message)
@@ -40,7 +39,6 @@ const News = () => {
             <span className="loading loading-bars fixed top-[50vh] left-[50vw] loading-lg"></span>
         )
     }
-
 
     return (
         <section>
@@ -81,5 +79,4 @@ const News = () => {
     );
 };
 
-export default News;
-
+export default CategoryNews;

@@ -5,19 +5,21 @@ import Searchbar from "../Searchbar/Searchbar";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { axiosPublic } from '@/axios/api';
 import Link from 'next/link';
+import { all } from 'axios';
+import moment from 'moment';
 import Footer from '../Footer/Footer';
 
-const News = () => {
-    const [hoveredItems, setHoveredItems] = useState({});
+const TodayNews = () => {
     const [hoveredId, setHoveredId] = useState(null);
-    const [skipPages, setSkipPages] = useState(0)
-    const [allNews, setAllNews] = useState([])
-    const [isLoading , setIsLoading] = useState(true)
+    const [skipPages, setSkipPages] = useState(0);
+    const [allNews, setAllNews] = useState([]);
+    const [isLoading, setIsLoading] = useState(true)
+    console.log(allNews)
 
     useEffect(() => {
         axiosPublic.get(`/allNews?skipPages=${skipPages}&perPageData=${16}`)
             .then(res => {
-                setAllNews(res.data)
+                setAllNews(res?.data?.filter(news => moment().isSame(news?.createdAt, 'day')))
                 setIsLoading(false)
 
             })
@@ -35,13 +37,11 @@ const News = () => {
         }
         return text;
     }
-    if(isLoading){
-        return(
+    if (isLoading) {
+        return (
             <span className="loading loading-bars fixed top-[50vh] left-[50vw] loading-lg"></span>
         )
     }
-
-
     return (
         <section>
         <section className="space-y-7">
@@ -78,8 +78,7 @@ const News = () => {
         </section>
         <Footer/>
         </section>
-    );
+        )
 };
 
-export default News;
-
+export default TodayNews;

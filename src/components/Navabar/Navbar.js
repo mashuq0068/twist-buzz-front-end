@@ -1,18 +1,22 @@
+"use client"
 import Image from "next/image";
 import logo from "../../../public/images/twist-buzz logo.png"
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 
 const Navbar = () => {
+  const router = useRouter()
   const navLink = <>
-    <li className="cursor-pointer">News</li>
-    <li className="cursor-pointer">Today news</li>
-    <li className="cursor-pointer">Business</li>
-    <li className="cursor-pointer">Politics</li>
-    <li className="cursor-pointer">Technology</li>
-    <li className="cursor-pointer">Crime</li>
-    <li className="cursor-pointer">Sports</li>
-    <li className="cursor-pointer">Others</li>
+    <Link href='/' className="cursor-pointer">News</Link>
+    <Link href='/today-news' className="cursor-pointer">Today news</Link>
+    <Link href='/business' className="cursor-pointer">Business</Link>
+    <Link href='/politics' className="cursor-pointer">Politics</Link>
+    <Link href='/technology' className="cursor-pointer">Technology</Link>
+    <Link href='/crime' className="cursor-pointer">Crime</Link>
+    <Link href='sports' className="cursor-pointer">Sports</Link>
+    <Link href='/others' className="cursor-pointer">Others</Link>
     <Link href='/dashboard'>Dashboard</Link>
   </>
   return (
@@ -26,7 +30,9 @@ const Navbar = () => {
           {navLink}
           </ul>
         </div>
-        <a className=" lg:absolute "><Image className="cursor-pointer" height={100} width={150} src={logo} alt="official-logo" /></a>
+        <a className=" lg:absolute "><Image onClick={()=>
+          router.push('/')
+        } className="cursor-pointer" height={100} width={150} src={logo} alt="official-logo" /></a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu space-x-8  menu-horizontal px-1">
@@ -34,7 +40,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <button class="btn btn-active btn-neutral">Login</button>
+        <button className="btn btn-active btn-neutral">Login</button>
       </div>
     </div>
   );
