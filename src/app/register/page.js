@@ -29,7 +29,7 @@ const Register = () => {
                         .then(res => {
                             console.log(res?.data)
                             if (res?.data) {
-                                router.back()
+                                router.push('/')
 
                             }
                         })
@@ -66,7 +66,7 @@ const Register = () => {
                         axiosPublic.post(`/user`, userInfo)
                             .then(res => {
                                 if (res.data) {
-                                    router.back();
+                                    router.push('/');
                                     setIsLoading(false)
                                 }
                             })

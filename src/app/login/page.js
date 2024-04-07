@@ -26,7 +26,7 @@ const Login = () => {
             .then(res => {
               console.log(res?.data)
               if (res?.data) {
-                router.back()
+                router.push('/')
 
               }
             })
@@ -46,7 +46,7 @@ const Login = () => {
     .then(res => {
         console.log(res)
         if(res){
-          router.back()
+          router.push('/')
           setIsLoading(false)
            
         }
