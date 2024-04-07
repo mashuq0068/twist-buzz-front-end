@@ -39,6 +39,13 @@ const CategoryNews = ({ category }) => {
             <span className="loading loading-bars fixed top-[50vh] left-[50vw] loading-lg"></span>
         )
     }
+    else if (allNews?.length === 0) {
+        return(
+            <div className=' text-2xl text-gray-400 font-semibold text-center absolute left-[45%] top-[40%]'>
+                No news available
+            </div>
+        )
+    }
 
     return (
         <section>

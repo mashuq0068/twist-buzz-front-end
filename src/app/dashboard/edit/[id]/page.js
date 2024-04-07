@@ -2,6 +2,7 @@
 
 import EditCreateNews from '@/components/EditCreateNews/EditCreateNews';
 import EditNewsEditor from '@/components/EditNewsEditor/EditnewsEditor';
+import AdminVerification from '@/utils/AdminVerification';
 
 import React, { useState } from 'react';
 
@@ -13,16 +14,18 @@ const Edit = ({ params }) => {
     const [isEditor, setIsEditor] = useState(false)
 
     return (
-        <div className='blog-container'>
-        {
-            isEditor ?
-                <EditNewsEditor id={params?.id} title={title} description={description} category={category} image={image} />
-               
-                :
-                <EditCreateNews setTitle={setTitle} setDescription={setDescription} setImage={setImage} setCategory={setCategory} setIsEditor={setIsEditor} id={params?.id}  />
-                
-        }
-    </div>
+        <AdminVerification>
+            <div className='blog-container'>
+                {
+                    isEditor ?
+                        <EditNewsEditor id={params?.id} title={title} description={description} category={category} image={image} />
+
+                        :
+                        <EditCreateNews setTitle={setTitle} setDescription={setDescription} setImage={setImage} setCategory={setCategory} setIsEditor={setIsEditor} id={params?.id} />
+
+                }
+            </div>
+        </AdminVerification>
     );
 };
 

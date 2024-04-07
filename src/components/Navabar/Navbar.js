@@ -3,11 +3,14 @@ import Image from "next/image";
 import logo from "../../../public/images/twist-buzz logo.png"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import useAdmin from "@/hooks/useAdmin";
 
 
 
 const Navbar = () => {
   const router = useRouter()
+  const isAdmin = useAdmin()
+  console.log(isAdmin)
   const navLink = <>
     <Link href='/' className="cursor-pointer">News</Link>
     <Link href='/today-news' className="cursor-pointer">Today news</Link>
@@ -17,7 +20,7 @@ const Navbar = () => {
     <Link href='/crime' className="cursor-pointer">Crime</Link>
     <Link href='sports' className="cursor-pointer">Sports</Link>
     <Link href='/others' className="cursor-pointer">Others</Link>
-    <Link href='/dashboard'>Dashboard</Link>
+    {isAdmin ? <Link href='/dashboard'>Dashboard</Link> : ""}
   </>
   return (
     <div className="navbar nav-container bg-base-100">
@@ -40,7 +43,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-active btn-neutral">Login</button>
+        <Link href='/login' className="btn btn-active btn-neutral">Login</Link>
       </div>
     </div>
   );

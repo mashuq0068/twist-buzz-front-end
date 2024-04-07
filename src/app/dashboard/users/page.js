@@ -1,7 +1,9 @@
+import AdminVerification from '@/utils/AdminVerification';
 import React from 'react';
 
 const Users = () => {
     return (
+        <AdminVerification>
         <div className='container'>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
@@ -27,6 +29,7 @@ const Users = () => {
                 </table>
             </div>
         </div>
+        </AdminVerification>
     );
 };
 

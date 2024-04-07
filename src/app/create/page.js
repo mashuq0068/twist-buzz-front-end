@@ -1,6 +1,7 @@
 "use client"
 import CreateNews from '@/components/CreateNews/CreateNews';
 import NewsEditor from '@/components/NewsEditor/NewsEditor';
+import AdminVerification from '@/utils/AdminVerification';
 
 import React, { useState } from 'react';
 
@@ -14,15 +15,17 @@ const Create = () => {
 
 
     return (
-        <div className='blog-container'>
-            {
-                isEditor ?
-                    <NewsEditor title={title} description={description} category={category} image={image} />
+        <AdminVerification>
+            <div className='blog-container'>
+                {
+                    isEditor ?
+                        <NewsEditor title={title} description={description} category={category} image={image} />
 
-                    :
-                    <CreateNews setTitle={setTitle} setDescription={setDescription} setImage={setImage} setCategory={setCategory} setIsEditor={setIsEditor} />
-            }
-        </div>
+                        :
+                        <CreateNews setTitle={setTitle} setDescription={setDescription} setImage={setImage} setCategory={setCategory} setIsEditor={setIsEditor} />
+                }
+            </div>
+        </AdminVerification>
     );
 };
 
