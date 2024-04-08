@@ -26,7 +26,7 @@ const CategoryNews = ({ category }) => {
                 console.error(error.message);
                 setIsLoading(false);
             });
-    }, [skipPages, category]); // Include category in dependency array
+    }, [skipPages]); // Include category in dependency array
 
     function truncateText(text, maxCharacters) {
         if (text.length > maxCharacters) {
@@ -46,6 +46,41 @@ const CategoryNews = ({ category }) => {
 
     const handlePageClick = page => {
         setSkipPages(page);
+    };
+
+    // Render pagination buttons
+    const renderPaginationButtons = () => {
+        const maxButtons = 6; // Maximum number of pagination buttons to display
+        const halfMaxButtons = Math.floor(maxButtons / 2); // Half of the maximum buttons
+        const startPage = Math.max(0, skipPages - halfMaxButtons); // Calculate the starting page number
+        const endPage = Math.min(totalPages - 1, startPage + maxButtons - 1); // Calculate the ending page number
+
+        const paginationButtons = [];
+
+        // Add Previous button if skipPages > 0
+        if (skipPages > 0) {
+            paginationButtons.push(
+                <button key="previous" className='px-6 py-2 cursor-pointer rounded-md text-white bg-neutral transition duration-300 ease-in-out' onClick={handlePreviousPage}>Previous</button>
+            );
+        }
+
+        // Add page buttons
+        for (let i = startPage; i <= endPage; i++) {
+            paginationButtons.push(
+                <button key={i} onClick={() => handlePageClick(i)} className={skipPages === i ? 'px-4 py-2 cursor-pointer rounded-md border border-neutral transition duration-300 ease-in-out' : 'hover:border hover:border-neutral transition duration-300 ease-in-out px-4 py-2 cursor-pointer rounded-md'}>
+                    {i + 1}
+                </button>
+            );
+        }
+
+        // Add Next button if skipPages !== totalPages - 1
+        if (skipPages !== totalPages - 1) {
+            paginationButtons.push(
+                <button key="next" className='px-6 py-2 cursor-pointer rounded-md text-white bg-neutral transition duration-300 ease-in-out' onClick={handleNextPage}>Next</button>
+            );
+        }
+
+        return paginationButtons;
     };
 
     if (isLoading) {
@@ -97,14 +132,8 @@ const CategoryNews = ({ category }) => {
 
             {/* Pagination buttons */}
             {totalPages > 1 &&
-                <div className="flex  mt-8 mb-8  justify-end space-x-3">
-                    {skipPages > 0 && <button className='px-6 py-2 cursor-pointer rounded-md  text-white  bg-neutral transition duration-300 ease-in-out' onClick={handlePreviousPage} >Previous</button>}
-                    {[...Array(totalPages)].map((_, index) => (
-                        <button  key={index} onClick={() => handlePageClick(index)} className={skipPages === index ? 'px-4 py-2 cursor-pointer rounded-md   border  border-neutral transition duration-300 ease-in-out' : 'hover:border hover:border-neutral transition duration-300 ease-in-out px-4 py-2 cursor-pointer rounded-md '}>
-                            {index + 1}
-                        </button>
-                    ))}
-                    {skipPages !== totalPages - 1 && <button className='px-6  py-2 cursor-pointer rounded-md  text-white  bg-neutral transition duration-300 ease-in-out' onClick={handleNextPage} >Next</button>}
+                <div className="flex mt-8 mb-8 justify-end space-x-3">
+                    {renderPaginationButtons()}
                 </div>
             }
             <Footer />

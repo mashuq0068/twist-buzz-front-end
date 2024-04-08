@@ -8,7 +8,7 @@ import React, { useContext, useState } from 'react';
 import Link from "next/link";
 
 const Register = () => {
-    const { userWithGoogle, createUser } = useContext(AuthContext)
+    const { userWithGoogle, createUser , user } = useContext(AuthContext)
     const [error, setError] = useState("")
     const [isLoading , setIsLoading] = useState(false)
     const router = useRouter()
@@ -91,6 +91,7 @@ const Register = () => {
     
     return (
         <div>
+            <div className='container'>{user && <p className=' text-red-600 text-center mt-8 text-xl'>You have already an account here  with {user?.email}</p>}</div>
             <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow-shadow-slate-300">
                 <h1 className="text-4xl font-medium">Register</h1>
                 <p className="text-slate-500">Hi, Welcome back 👋</p>

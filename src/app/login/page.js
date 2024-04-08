@@ -6,7 +6,7 @@ import React, { useContext, useState } from 'react';
 import Link from "next/link";
 
 const Login = () => {
-  const {userWithGoogle , loginUser} = useContext(AuthContext)
+  const {userWithGoogle , loginUser , user} = useContext(AuthContext)
   const [error , setError] = useState("")
   const [isLoading , setIsLoading] = useState(false)
 
@@ -60,6 +60,8 @@ const Login = () => {
   }
   
   return (
+    <>
+     <div className='container'>{user && <p className=' text-red-600 text-center mt-8 text-xl'>You have already an account here  with {user?.email}</p>}</div>
     <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow-shadow-slate-300">
       <h1 className="text-4xl font-medium">Login</h1>
       <p className="text-slate-500">Hi, Welcome back 👋</p>
@@ -81,7 +83,7 @@ const Login = () => {
             <p className="font-medium text-slate-700 pb-2">Password</p>
             <input id="password" name="password" type="password" className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="Enter your password" />
           </label>
-          <div className="flex items-center  flex-row justify-between">
+          {/* <div className="flex items-center  flex-row justify-between">
             <div>
               <label htmlFor="remember flex items-center gap-2">
                 <input type="checkbox" id="remember" className="w-4 h-4 border-slate-200 focus:bg-indigo-600  mr-2" />
@@ -91,7 +93,7 @@ const Login = () => {
             <div>
               <a href="#" className="font-medium text-indigo-600">Forgot Password?</a>
             </div>
-          </div>
+          </div> */}
           {error && <div className=' text-red-600'>{error}</div>}
           <button className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
           {isLoading && <span className="loading text-white  loading-spinner loading-xs"></span>}
@@ -114,6 +116,8 @@ const Login = () => {
         </div>
       </form>
     </div>
+    </>
+    
   );
 };
 
