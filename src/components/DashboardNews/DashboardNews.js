@@ -85,7 +85,7 @@ const DashboardNews = () => {
         );
     } else if (allNews.length === 0) {
         return (
-            <div className=' text-2xl text-gray-400 font-semibold text-center absolute left-[45%] top-[40%]'>
+            <div className=' md:text-2xl text-xl text-gray-400 font-semibold text-center h-[60vh] flex justify-center items-center'>
                 No news available
             </div>
         );
@@ -103,7 +103,7 @@ const DashboardNews = () => {
             if (result.isConfirmed) {
                 axiosPublic.delete(`/news/${id}`)
                     .then(res => {
-                        const filteredNews = allNews?.filter(news => news?._id === id)
+                        const filteredNews = allNews?.filter(news => news?._id !== id)
                         setAllNews(filteredNews)
                         if (res.data.deletedCount > 0) {
                             Swal.fire({

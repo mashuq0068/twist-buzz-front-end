@@ -44,7 +44,7 @@ const TodayNews = () => {
     }
     else if (allNews?.length === 0) {
         return (
-            <div className=' text-2xl text-gray-400 font-semibold text-center absolute left-[45%] top-[40%]'>
+            <div className='md:text-2xl text-xl text-gray-400 font-semibold text-center h-[60vh] flex justify-center items-center'>
                 No news available
             </div>
         )

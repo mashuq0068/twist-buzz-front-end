@@ -69,7 +69,7 @@ const Navbar = () => {
         </div>
         <a className=" lg:absolute "><Image onClick={() =>
           router.push('/')
-        } className="cursor-pointer" height={100} width={150} src={logo} alt="official-logo" /></a>
+        } className="cursor-pointer" height={100} width={150} src={logo} alt="twist-buzz-logo" /></a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu space-x-8  menu-horizontal px-1">
